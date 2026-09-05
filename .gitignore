@@ -1,0 +1,19 @@
+# Build output
+build/
+bin/
+*.o
+*.so
+*.a
+
+# Datasets & large generated data
+Dataset/
+*.log
+*.pcd
+*.obj
+
+# OS & Editor files
+.DS_Store
+*.swp
+*~
+.vscode/
+.idea/
