@@ -79,7 +79,7 @@ RUN wget https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz \
     && cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES \
-    && make -j$(nproc) \
+    && make -j2 \
     && sudo make install \
     && cd /tmp \
     && sudo rm -rf VTK-8.2.0*
@@ -97,24 +97,24 @@ RUN mkdir -p /tmp/deps && cd /tmp/deps \
 RUN cd /tmp/deps/gflags-2.2.1 \
     && mkdir build && cd build \
     && cmake .. -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-    && sudo make -j$(nproc) && sudo make install \
+    && sudo make -j2 && sudo make install \
     && sudo ldconfig
 
 # Build and install glog
 RUN cd /tmp/deps/glog-0.3.5 \
     && ./configure \
-    && sudo make -j$(nproc) && sudo make install \
+    && sudo make -j2 && sudo make install \
     && sudo ldconfig
 
 # Build and install LAPACK
 RUN cd /tmp/deps/lapack-3.10.1 \
     && mkdir -p build && cd build \
     && sudo cmake .. -DCMAKE_BUILD_TYPE=Release \
-    && sudo make -j$(nproc) && sudo make install
+    && sudo make -j2 && sudo make install
 
 # Build and install OpenBLAS
 RUN cd /tmp/deps/OpenBLAS-0.3.17 \
-    && sudo make TARGET=GENERIC -j$(nproc) \
+    && sudo make TARGET=GENERIC -j2 \
     && sudo make install
 
 # Install PCL
@@ -125,7 +125,7 @@ RUN wget https://github.com/PointCloudLibrary/pcl/archive/refs/tags/pcl-${PCL_VE
     && cmake .. \
     -DCMAKE_BUILD_TYPE=Release \
     -DVTK_RENDERING_BACKEND=OpenGL2 \
-    && sudo make -j$(nproc) \
+    && sudo make -j2 \
     && sudo make install \
     && cd /tmp \
     && sudo rm -rf pcl-pcl-*
